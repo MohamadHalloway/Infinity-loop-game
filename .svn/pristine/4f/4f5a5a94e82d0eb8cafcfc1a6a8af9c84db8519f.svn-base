@@ -1,0 +1,137 @@
+package jpp.infinityloop;
+
+import java.util.*;
+import java.util.concurrent.TimeoutException;
+
+import static java.util.Collections.shuffle;
+
+public class Board {
+    private int width;
+    private int height;
+    private List<Tile> tiles;
+    private Tile[][] boardArray;
+
+
+    public Board(int x, int y, List<Tile> z) {
+        width = x;
+        height = y;
+        tiles = new ArrayList<>(z);
+        Iterator<Tile> iterator = tiles.iterator();
+        boardArray = new Tile[height][width];
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+                boardArray[j][i] = iterator.next();
+            }
+        }
+
+    }
+
+    public boolean checkSolved() {
+        for (Tile tile : tiles) {
+            if (!nineOclock(tile)) {
+                return false;
+            }
+            if (!twelveOclock(tile)) {
+                return false;
+            }
+        }
+        return true;
+
+
+    }
+
+    public void shuffle() {
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int r = new Random().nextInt(4);
+                for (int k = 0; k < r; k++){
+                    rotate(j, i);
+                }
+            }
+        }
+
+        for (Tile tile: tiles){
+
+
+        }
+    }
+
+    public void rotate(int x, int y) {
+        if (x >= width || x < 0 || y >= height || y < 0) {
+            throw new IllegalArgumentException("x or y is too big or under 0");
+        }
+        Tile gesucht = tiles.get((y * width) + x);
+        gesucht.rotateTeil();
+
+    }
+
+    public List<Tile> getTiles() {
+        return tiles;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public Tile[][] getBoardArray() {
+        return boardArray;
+    }
+
+    public String toString(){
+        String result = "";
+        int height = getHeight();
+        int width = getWidth();
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                result += boardArray[h][w];
+
+            }
+            result += "\n";
+        }
+        return result;
+    }
+
+    private Tile getObigerTeil(Tile tile) {
+        Tile obigerTeil = new Tile((byte) 0);
+        if ((getTiles().indexOf(tile) / getWidth()) != 0) { //if its not in the first row
+            obigerTeil = getTiles().get(getTiles().indexOf(tile) - getWidth());
+        }
+        return obigerTeil;
+    }
+
+    private Tile getLinkerTeil(Tile tile) {
+        Tile linkerTeil = new Tile((byte) 0);
+        if ((getTiles().indexOf(tile) % getWidth()) != 0) {  //if its not in the first column
+            linkerTeil = getTiles().get(getTiles().indexOf(tile) - 1);
+        }
+        return linkerTeil;
+    }
+
+    private boolean nineOclock(Tile tile) {
+        Tile linkerTeil = getLinkerTeil(tile);
+        int links = tile.getHex() & Tile.links;
+        int rechts = linkerTeil.getHex() & Tile.rechts;
+        if (links == 0 && rechts == 0) {
+            return true;
+        } else if (links > 0 && rechts > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean twelveOclock(Tile tile){
+        Tile obigerTeil = getObigerTeil(tile);
+        int oben = tile.getHex() & Tile.oben;
+        int unten = obigerTeil.getHex() & Tile.unten;
+        if (oben == 0 && unten == 0) return true;
+        else if (oben > 0 && unten > 0) return true;
+        else return false;
+    }
+
+}

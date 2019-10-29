@@ -1,0 +1,239 @@
+package jpp.infinityloop;
+
+import java.util.List;
+
+public class Tile {
+    private TileType type;
+    private Orientation orientation;
+    private byte hex;
+    private String bin;
+    private List<Tile> nachbern;
+
+
+    public Tile(TileType tileType, Orientation orientation) {
+        this.type = tileType;
+        this.orientation = orientation;
+        switch (tileType) {
+            case EMPTY:
+                empty();
+                break;
+            case DEAD_END:
+                deadEnd(orientation);
+                break;
+            case TEE:
+                tee(orientation);
+                break;
+            case BEND:
+                bend(orientation);
+                break;
+            case CROSS:
+                cross();
+                break;
+            case STRAIGHT:
+                straight(orientation);
+        }
+    }
+
+    private void empty() {
+        hex = 0x00;
+        bin = "0000";
+    }
+
+    public void rotate() {
+        switch (orientation) {
+            case UP:
+                this.orientation = Orientation.RIGHT;
+                break;
+            case RIGHT:
+                this.orientation = Orientation.DOWN;
+                break;
+            case DOWN:
+                this.orientation = orientation.LEFT;
+                break;
+            case LEFT:
+                this.orientation = Orientation.UP;
+                break;
+        }
+        switch (type) {
+            case DEAD_END:
+                deadEnd(orientation);
+                break;
+            case TEE:
+                tee(orientation);
+                break;
+            case BEND:
+                bend(orientation);
+                break;
+            case STRAIGHT:
+                straight(orientation);
+                break;
+            case CROSS:
+                cross();     //macht nix
+                break;
+            case EMPTY:
+                empty();     //macht nix
+                break;
+        }
+    }
+
+    private void deadEnd(Orientation orientation) {
+        switch (orientation) {
+            case UP:
+                hex = 0x04;
+                bin = "0100";
+                break;
+            case DOWN:
+                hex = 0x01;
+                bin = "0001";
+                break;
+            case LEFT:
+                hex = 0x08;
+                bin = "1000";
+                break;
+            case RIGHT:
+                hex = 0x02;
+                bin = "0010";
+                break;
+        }
+    }
+
+    private void tee(Orientation orientation) {
+        switch (orientation) {
+            case RIGHT:
+                hex = 0x0B;
+                bin = "1011";
+                break;
+            case LEFT:
+                hex = 0x0E;
+                bin = "1110";
+                break;
+            case DOWN:
+                hex = 0x0D;
+                bin = "1101";
+                break;
+            case UP:
+                hex = 0x07;
+                bin = "0111";
+        }
+    }
+
+    private void bend(Orientation orientation) {
+        switch (orientation) {
+            case RIGHT:
+                hex = 0x03;
+                bin = "0011";
+                break;
+            case LEFT:
+                hex = 0x0C;
+                bin = "1100";
+                break;
+            case DOWN:
+                hex = 0x09;
+                bin = "1001";
+                break;
+            case UP:
+                hex = 0x06;
+                bin = "0110";
+        }
+    }
+
+    private void cross() {
+        hex = 0x0F;
+        bin = "1111";
+    }
+
+    private void straight(Orientation orientation) {
+        switch (orientation) {
+            case UP:
+                hex = 0x05;
+                bin = "0101";
+                break;
+            case DOWN:
+                hex = 0x05;
+                bin = "0101";
+                break;
+            default:
+                hex = 0x0A;
+                bin = "1010";
+        }
+    }
+
+    public byte getHex() {
+        return hex;
+    }
+
+    public String getBin() {
+        return bin;
+    }
+
+    public List<Tile> getNachbern() {
+        return nachbern;
+    }
+
+    public void setNachbern(List<Tile> nachbern) {
+        this.nachbern = nachbern;
+    }
+
+    @Override
+    public String toString() {
+        switch (type) {
+            case EMPTY:
+                return "\u2007";
+            case CROSS:
+                return "\u254B";
+            case STRAIGHT:
+                switch (orientation) {
+                    case DOWN:
+                        return "\u2503";
+                    case UP:
+                        return "\u2503";
+                    default:
+                        return "\u2501";
+                }
+            case BEND:
+                switch (orientation) {
+                    case UP:
+                        return "\u2517";
+                    case DOWN:
+                        return "\u2513";
+                    case LEFT:
+                        return "\u251B";
+                    case RIGHT:
+                        return "\u250F";
+                }
+            case TEE:
+                switch (orientation) {
+                    case RIGHT:
+                        return "\u2533";
+                    case LEFT:
+                        return "\u253B";
+                    case DOWN:
+                        return "\u252B";
+                    case UP:
+                        return "\u2523";
+
+                }
+            case DEAD_END:
+                switch (orientation) {
+                    case RIGHT:
+                        return "\u257A";
+                    case LEFT:
+                        return "\u2578";
+                    case DOWN:
+                        return "\u257B";
+                    case UP:
+                        return "\u2579";
+                }
+
+        }
+        return "";
+    }
+
+    public Orientation orientation() {
+        return orientation;
+    }
+
+    public TileType type() {
+        return type;
+    }
+}

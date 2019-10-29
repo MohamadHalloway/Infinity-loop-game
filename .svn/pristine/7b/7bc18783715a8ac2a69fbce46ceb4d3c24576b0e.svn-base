@@ -1,0 +1,144 @@
+
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import jpp.infinityloop.Board;
+import jpp.infinityloop.Tile;
+import jpp.infinityloop.adapter.TestAdapter;
+import jpp.infinityloop.generatoren.MatrixGenerator;
+
+import javax.swing.plaf.metal.MetalTheme;
+import javax.swing.text.Element;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+
+public class MainWindow extends Application {
+
+    public Stage window;
+    Scene welcome, game;
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        window = primaryStage;
+
+        //WELCOME SCENE
+        Button letsPlay = new Button("Let's play");
+        Button exit = new Button("Exit game");
+        letsPlay.setOnAction(event -> {
+            window.setScene(game);
+        });
+        exit.setOnAction(event -> window.close());
+
+        //Layout for welcome scene
+//        AnchorPane anchorPane = new AnchorPane();
+        VBox vbox = new VBox(10);
+        vbox.getChildren().addAll( letsPlay, exit);
+        HBox hBox = new HBox(vbox);
+//        anchorPane.getChildren().add(hBox);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setStyle("-fx-background-image: url('pngTiles/background.gif')");
+        welcome = new Scene(hBox, 600, 400);
+
+        //GAME SCENE
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        Parent root = fxmlLoader.load();
+        Controller controller = fxmlLoader.getController();
+        controller.startGame();
+        game = new Scene(root, 800, 600);
+
+        primaryStage.setTitle("Infinity Loop");
+        primaryStage.setScene(welcome);
+        primaryStage.show();
+
+
+//
+//        TestAdapter testAdapter = new TestAdapter();
+//        testAdapter.initGenerator(3, 3, 3, 3);
+//        Board generated = testAdapter.generate();
+//        Iterator<Tile> iterator = generated.getTiles().iterator();
+//
+//        AnchorPane anchorPane = new AnchorPane();
+//
+//        GridPane gridPane = new GridPane();
+//        for (int j = 0; j < generated.getHeight(); j++){
+//            gridPane.addRow(j);
+//        }
+//        for (int i = 0; i < generated.getWidth(); i++){
+//            gridPane.addColumn(i);
+//        }
+//        for (int j = 0; j < generated.getHeight(); j++){
+//            for (int i = 0; i < generated.getWidth(); i++){
+//                TileView tileView = new TileView(iterator.next());
+//                gridPane.add(tileView.getImageView(), i, j);
+//                System.out.println(i);
+//            }
+//        }
+//        gridPane.setStyle("-fx-background-color: red");
+//
+//        primaryStage.setTitle("Infinity Loop");
+//        VBox vBox = new VBox();
+//
+//
+////        Pane root = new Pane();
+////
+////        final int count = 7; //number of rectangles
+////
+////        NumberBinding minSide = Bindings
+////                .min(root.heightProperty(), root.widthProperty())
+////                .divide(count);
+////
+////        for (int x = 0; x < count; x++) {
+////            for (int y = 0; y < count; y++) {
+////                Rectangle rectangle = new Rectangle(0, 0, Color.LIGHTGRAY);
+////
+////                rectangle.xProperty().bind(minSide.multiply(x));
+////                rectangle.yProperty().bind(minSide.multiply(y));
+////                rectangle.heightProperty().bind(minSide.subtract(2));
+////                rectangle.widthProperty().bind(rectangle.heightProperty());
+////                root.getChildren().add(rectangle);
+////            }
+////        }
+////
+////        stage.setScene(new Scene(root, 500, 500));
+////        stage.show();
+//
+//
+//
+//        BorderPane borderPane = new BorderPane();
+//        borderPane.setCenter(gridPane);
+//        borderPane.setRight(vBox);
+//        borderPane.setMaxSize(600, 400);
+//
+//
+////        HBox hBox = new HBox(gridPane,vBox);
+//
+//        Scene scene = new Scene(borderPane);
+//        primaryStage.setMaxWidth(600);
+//        primaryStage.setMaxHeight(400);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
+
+    }
+}

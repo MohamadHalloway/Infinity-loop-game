@@ -1,0 +1,13 @@
+package jpp.infinityloop.generatoren;
+
+public class ShuffledGenerator implements BoardGenerator {
+    @Override
+    public BoardGenerator next() {
+        return null;
+    }
+
+    @Override
+    public boolean hasnext() {
+        return false;
+    }
+}

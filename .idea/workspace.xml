@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="81e12df0-b86f-48ec-bf4b-109718c3bb32" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lib/ContentPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI/ContentPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lib/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lib/Images.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI/Images.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lib/MenuButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI/MenuButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lib/MenuPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI/MenuPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lib/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lib/TileGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI/TileGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lib/TileView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI/TileView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI/lib/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/GUI/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpp/infinityloop/BacktrackingSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/BacktrackingSolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpp/infinityloop/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpp/infinityloop/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/MainTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpp/infinityloop/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jpp/infinityloop/generatoren/FilesGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jpp/infinityloop/generatoren/FilesGenerator.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/InfinityLoop$MainWindow.ic" NAME="MainWindow Coverage Results" MODIFIED="1535962485671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/InfinityLoop$MainTest.ic" NAME="MainTest Coverage Results" MODIFIED="1535730150769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>jpp.infinityloop.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="InfinityLoop" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>links</find>
+      <find>unter</find>
+      <find>solve</find>
+      <find>ben</find>
+      <find>rotate</find>
+      <find>rotate()</find>
+      <find>indexof</find>
+      <find>indexOf</find>
+      <find>declare</find>
+      <find>here</find>
+      <find>Random</find>
+      <find>byteboard</find>
+      <find>index</find>
+      <find>system</find>
+      <find>gener</find>
+      <find>ang</find>
+      <find>label</find>
+      <find>Grid</find>
+      <find>root</find>
+      <find>start</find>
+      <find>ill</find>
+      <find>argum</find>
+      <find>anch</find>
+      <find>tilepane</find>
+      <find>Tile</find>
+      <find>setsce</find>
+      <find>set</find>
+      <find>getre</find>
+      <find>////        }</find>
+      <find>decode</find>
+    </findStrings>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="width" value="1240" />
+    <option name="height" value="675" />
+  </component>
+  <component name="ProjectId" id="1SsruDkElUF1Wtg0LEX7eauLARO" />
+  <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="random&#9;PSI&#9;JAVA://java.lang.StrictMath#random&#10;randomnum&#9;PSI&#9;JAVA://jdk.packager.services.singleton.SingleInstanceImpl#randomNumber" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553638603287" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\s353177\IdeaProjects\InfinityLoop\src\jpp\infinityloop\GUI" />
+      <recent name="C:\Users\s353177\IdeaProjects\InfinityLoop\GUI\lib" />
+      <recent name="C:\Users\s353177\IdeaProjects\InfinityLoop\GUI" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.MainTest">
+    <configuration name="MainTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="jpp.infinityloop.MainTest" />
+      <module name="InfinityLoop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="jpp.infinityloop.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainWindow" />
+      <module name="InfinityLoop" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.MainTest" />
+      <item itemvalue="Application.MainWindow" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainTest" />
+        <item itemvalue="Application.MainWindow" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\s353177\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\s353177\IdeaProjects\InfinityLoop" />
+          <option name="myCopyRoot" value="C:\Users\s353177\IdeaProjects\InfinityLoop" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\s353177\IdeaProjects\InfinityLoop" />
+          <option name="myCopyRoot" value="C:\Users\s353177\IdeaProjects\InfinityLoop" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81e12df0-b86f-48ec-bf4b-109718c3bb32" name="Default Changelist" comment="" />
+      <created>1534532432829</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1534532432829</updated>
+      <workItem from="1534532434121" duration="1805000" />
+      <workItem from="1534777266460" duration="495000" />
+      <workItem from="1534789280250" duration="10000" />
+      <workItem from="1534833928412" duration="5385000" />
+      <workItem from="1534869576391" duration="417000" />
+      <workItem from="1534870054824" duration="7122000" />
+      <workItem from="1534888633043" duration="10335000" />
+      <workItem from="1534946552734" duration="31103000" />
+      <workItem from="1535050485911" duration="19527000" />
+      <workItem from="1535121611765" duration="7845000" />
+      <workItem from="1535201500243" duration="8728000" />
+      <workItem from="1535275738567" duration="1538000" />
+      <workItem from="1535282774090" duration="8654000" />
+      <workItem from="1535309035057" duration="599000" />
+      <workItem from="1535356843434" duration="19878000" />
+      <workItem from="1535394109391" duration="7543000" />
+      <workItem from="1535459422222" duration="11792000" />
+      <workItem from="1535519368177" duration="1063000" />
+      <workItem from="1535526678975" duration="32038000" />
+      <workItem from="1535607979560" duration="1835000" />
+      <workItem from="1535613829314" duration="1886000" />
+      <workItem from="1535621899277" duration="11605000" />
+      <workItem from="1535653159669" duration="1904000" />
+      <workItem from="1535700071856" duration="402000" />
+      <workItem from="1535703115484" duration="9385000" />
+      <workItem from="1535720425443" duration="11001000" />
+      <workItem from="1535809727181" duration="3749000" />
+      <workItem from="1535822553422" duration="4878000" />
+      <workItem from="1535839873274" duration="5028000" />
+      <workItem from="1535877883572" duration="590000" />
+      <workItem from="1535883745288" duration="16706000" />
+      <workItem from="1535922956597" duration="2894000" />
+      <workItem from="1535961967721" duration="21947000" />
+      <workItem from="1535988127988" duration="2005000" />
+      <workItem from="1535993690935" duration="8080000" />
+      <workItem from="1536011613059" duration="2703000" />
+      <workItem from="1536018366212" duration="51000" />
+      <workItem from="1536048698637" duration="508000" />
+      <workItem from="1536053048391" duration="74000" />
+      <workItem from="1536062353677" duration="14009000" />
+      <workItem from="1536134939182" duration="118000" />
+      <workItem from="1536145999510" duration="5404000" />
+      <workItem from="1536186683752" duration="2383000" />
+      <workItem from="1536222686983" duration="2428000" />
+      <workItem from="1536228551295" duration="863000" />
+      <workItem from="1536237116411" duration="19000" />
+      <workItem from="1536280554688" duration="915000" />
+      <workItem from="1536285458624" duration="5673000" />
+      <workItem from="1541605485935" duration="44000" />
+      <workItem from="1541605557085" duration="571000" />
+      <workItem from="1541693892674" duration="648000" />
+      <workItem from="1541700594643" duration="13000" />
+      <workItem from="1541772735688" duration="13000" />
+      <workItem from="1548262440752" duration="50000" />
+      <workItem from="1548599706096" duration="12000" />
+      <workItem from="1548599785191" duration="245000" />
+      <workItem from="1550667935035" duration="611000" />
+      <workItem from="1551259367556" duration="1006000" />
+      <workItem from="1551274545435" duration="72000" />
+      <workItem from="1553630493004" duration="750000" />
+      <workItem from="1560444796069" duration="218000" />
+      <workItem from="1572363365706" duration="457000" />
+      <workItem from="1572363857183" duration="999000" />
+    </task>
+    <task id="LOCAL-00001">
+      <created>1535127888151</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1535127888151</updated>
+    </task>
+    <task id="LOCAL-00002">
+      <created>1535296138735</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1535296138736</updated>
+    </task>
+    <task id="LOCAL-00003">
+      <created>1535363467584</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1535363467584</updated>
+    </task>
+    <task id="LOCAL-00004">
+      <created>1535367747890</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1535367747890</updated>
+    </task>
+    <task id="LOCAL-00005">
+      <created>1535368391982</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1535368391982</updated>
+    </task>
+    <task id="LOCAL-00006">
+      <created>1535369481558</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1535369481558</updated>
+    </task>
+    <task id="LOCAL-00007">
+      <created>1535460050982</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1535460050982</updated>
+    </task>
+    <task id="LOCAL-00008">
+      <created>1535460242946</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1535460242946</updated>
+    </task>
+    <task id="LOCAL-00009">
+      <created>1535476872654</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1535476872654</updated>
+    </task>
+    <task id="LOCAL-00010">
+      <created>1535536274588</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1535536274588</updated>
+    </task>
+    <task id="LOCAL-00011">
+      <created>1535548313350</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1535548313350</updated>
+    </task>
+    <task id="LOCAL-00012">
+      <created>1535553238271</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1535553238271</updated>
+    </task>
+    <task id="LOCAL-00013">
+      <created>1535623379143</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1535623379143</updated>
+    </task>
+    <task id="LOCAL-00014">
+      <created>1535626681339</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1535626681339</updated>
+    </task>
+    <task id="LOCAL-00015">
+      <created>1535634833322</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1535634833322</updated>
+    </task>
+    <task id="LOCAL-00016">
+      <created>1535706473175</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1535706473175</updated>
+    </task>
+    <task id="LOCAL-00017">
+      <created>1535707404505</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1535707404505</updated>
+    </task>
+    <task id="LOCAL-00018">
+      <created>1535707501579</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1535707501579</updated>
+    </task>
+    <task id="LOCAL-00019">
+      <created>1535708230530</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1535708230530</updated>
+    </task>
+    <task id="LOCAL-00020">
+      <created>1535733703943</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1535733703943</updated>
+    </task>
+    <task id="LOCAL-00021">
+      <created>1535733801609</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1535733801609</updated>
+    </task>
+    <task id="LOCAL-00022">
+      <created>1535738563196</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1535738563196</updated>
+    </task>
+    <task id="LOCAL-00023">
+      <created>1535738881477</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1535738881477</updated>
+    </task>
+    <task id="LOCAL-00024">
+      <created>1535739529471</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1535739529471</updated>
+    </task>
+    <task id="LOCAL-00025">
+      <created>1535740952143</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1535740952143</updated>
+    </task>
+    <task id="LOCAL-00026">
+      <created>1535962273446</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1535962273446</updated>
+    </task>
+    <task id="LOCAL-00027">
+      <created>1535968886862</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1535968886862</updated>
+    </task>
+    <task id="LOCAL-00028">
+      <created>1535969071099</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1535969071099</updated>
+    </task>
+    <task id="LOCAL-00029">
+      <created>1535969837133</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1535969837133</updated>
+    </task>
+    <task id="LOCAL-00030">
+      <created>1535974577626</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1535974577626</updated>
+    </task>
+    <task id="LOCAL-00031">
+      <created>1535978036249</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1535978036249</updated>
+    </task>
+    <task id="LOCAL-00032">
+      <created>1535978554372</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1535978554372</updated>
+    </task>
+    <task id="LOCAL-00033">
+      <created>1536186783377</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1536186783377</updated>
+    </task>
+    <task id="LOCAL-00034">
+      <created>1536287996144</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1536287996144</updated>
+    </task>
+    <task id="LOCAL-00035">
+      <created>1536288282030</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1536288282030</updated>
+    </task>
+    <task id="LOCAL-00036">
+      <created>1536288913868</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1536288913868</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/jpp/infinityloop/GUI/TileGrid.java</url>
+          <line>17</line>
+          <properties class="TileGrid" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>x == board.width -1 &amp;&amp; y == 2</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>x == board.width &amp;&amp; y == 2</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>10</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>InfinityLoop</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

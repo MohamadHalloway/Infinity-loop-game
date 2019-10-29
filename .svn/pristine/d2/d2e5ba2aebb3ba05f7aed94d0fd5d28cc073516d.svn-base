@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: e;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <VBox fx:id="vBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="openBtn" mnemonicParsing="false" onAction="#handle">
+               <graphic>
+                  <ImageView fx:id="ordner" fitHeight="19.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Desktop/InfinityLoop/pngTiles/folder.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="shuffleBtn" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fx:id="twoArrows" fitHeight="20.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Desktop/InfinityLoop/pngTiles/shuffle.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="nextBtn" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fx:id="oneArrow" fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Desktop/InfinityLoop/pngTiles/arrow.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="solveBtn" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fx:id="solvedLogo" fitHeight="20.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Desktop/InfinityLoop/pngTiles/solve.png " />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="saveBtn" mnemonicParsing="false" prefHeight="28.0" prefWidth="37.0">
+               <graphic>
+                  <ImageView fx:id="saveLogos" fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Desktop/InfinityLoop/pngTiles/Save.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="SettingsBtn" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fx:id="settingLogo" fitHeight="20.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Desktop/InfinityLoop/pngTiles/settings.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      <TilePane fx:id="tilepane" layoutX="200.0" layoutY="85.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="150.0" />
+   </children>
+</AnchorPane>

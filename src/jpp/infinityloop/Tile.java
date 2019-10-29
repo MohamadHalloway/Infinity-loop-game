@@ -1,0 +1,138 @@
+package jpp.infinityloop;
+
+import java.util.List;
+import java.util.Objects;
+
+public class Tile {
+    private byte hex;
+
+
+    public final static byte links = 0b1000;
+    public final static byte oben = 0b0100;
+    public final static byte rechts = 0b0010;
+      public final static byte unten = 0b0001;
+
+
+    public Tile(byte hex) {
+        this.hex = hex;
+    }
+
+    public Tile(int number) {
+        switch (number) {
+            case 0:
+                hex = 0x0;
+                break;
+            case 1:
+                hex = 0x01;
+                break;
+            case 2:
+                hex = 0x03;
+                break;
+            case 3:
+                hex = 0x07;
+                break;
+            case 4:
+                hex = 0x0f;
+                break;
+            case 5:
+                hex = 0x05;
+                break;
+        }
+    }
+
+
+    public void rotateTeil() {
+        this.hex = (byte) (((hex >>> 1) | (hex << (Byte.SIZE - 5))) & 0x0f);
+    }
+
+
+
+
+    public boolean getLinks(){
+        if((hex & links) != 0){
+            return true;
+        }
+        return false;
+    }
+    public boolean getRechts(){
+        if((hex & rechts) != 0){
+            return true;
+        }
+        return false;
+    }
+    public boolean getOben(){
+        if((hex & oben) != 0){
+            return true;
+        }
+        return false;
+    }
+    public boolean getUnten(){
+        if((hex & unten) != 0){
+            return true;
+        }
+        return false;
+    }
+
+
+    public byte getHex() {
+        return hex;
+    }
+
+
+    @Override
+    public String toString() {
+        switch (hex) {
+            case 0:     //EMPTY
+                return " ";
+//                return "\u2007";
+            case 15:       //CROSS
+                return "\u254B";
+            case 5:  // STRAIGHT up oder down
+                return "\u2503";
+            case 10: // STRAIGHT left oder right
+                return "\u2501";
+            case 6:      //BEND up
+                return "\u2517";
+            case 9:      //BEND down
+                return "\u2513";
+            case 12:    //BEND left
+                return "\u251B";
+            case 3:    //BEND right
+                return "\u250F";
+            case 11: //TEE right
+                return "\u2533";
+            case 14:  //TEE left
+                return "\u253B";
+            case 13:  //TEE down
+                return "\u252B";
+            case 7:    //TEE up
+                return "\u2523";
+            case 2: //DEAD_END right
+                return "\u257A";
+            case 8:  //DEAD_END right
+                return "\u2578";
+            case 1:  //DEAD_END right
+                return "\u257B";
+            case 4:    //DEAD_END right
+                return "\u2579";
+        }
+        return "";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tile tile = (Tile) o;
+        return hex == tile.hex;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hex);
+    }
+
+    public void setHex(byte hex) {
+        this.hex = hex;
+    }
+}

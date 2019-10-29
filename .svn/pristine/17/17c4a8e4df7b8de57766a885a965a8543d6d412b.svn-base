@@ -1,0 +1,7 @@
+package jpp.infinityloop.generatoren;
+
+public interface BoardGenerator {
+
+    BoardGenerator next();
+    boolean hasnext();
+}

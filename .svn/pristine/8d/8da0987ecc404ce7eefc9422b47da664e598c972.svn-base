@@ -1,0 +1,4 @@
+import javafx.scene.layout.FlowPane;
+
+public class MenuPane extends FlowPane {
+}

@@ -1,0 +1,62 @@
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import jpp.infinityloop.Board;
+import jpp.infinityloop.Tile;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class TileGrid extends Pane {
+    private Pane root;
+
+    public TileGrid(Board generated){
+        Iterator<Tile> iterator = generated.getTiles().iterator();
+        Controller controller = new Controller();
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(10, 10, 10, 10));
+        gridPane.setVgap(8);
+        gridPane.setHgap(10);
+        for (int j = 0; j < generated.getHeight(); j++){
+            gridPane.addRow(j);
+        }
+        for (int i = 0; i < generated.getWidth(); i++){
+            gridPane.addColumn(i);
+        }
+        for (int j = 0; j < generated.getHeight(); j++){
+            for (int i = 0; i < generated.getWidth(); i++){
+                TileView tileView = new TileView(iterator.next());
+                gridPane.setConstraints(tileView, j, i);
+                gridPane.getChildren().add(tileView);
+                System.out.println(i);
+            }
+        }
+        gridPane.setStyle("-fx-background-color: red");
+
+        /*this.root = new Pane();
+
+        final int count = generated.getTiles().size(); //number of rectangles
+
+        NumberBinding minSide = Bindings
+                .min(root.heightProperty(), root.widthProperty())
+                .divide(count);
+
+        for (int x = 0; x < count; x++) {
+            for (int y = 0; y < count; y++) {
+                Rectangle rectangle = new Rectangle(0, 0, Color.LIGHTGRAY);
+
+                rectangle.xProperty().bind(minSide.multiply(x));
+                rectangle.yProperty().bind(minSide.multiply(y));
+                rectangle.heightProperty().bind(minSide.subtract(2));
+                rectangle.widthProperty().bind(rectangle.heightProperty());
+                root.getChildren().add(rectangle);
+            }
+        }*/
+    }
+}

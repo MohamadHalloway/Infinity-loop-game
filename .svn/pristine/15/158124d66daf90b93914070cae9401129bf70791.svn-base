@@ -1,0 +1,78 @@
+package jpp.infinityloop;
+
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.List;
+
+public class BacktrackingSolver implements Solver {
+    List<Tile> tiles;
+    Board board;
+
+
+    @Override
+    public boolean solve(Board board) {
+        this.board = board;
+        tiles = board.getTiles();
+        return myAlgo(board, tiles.get(0));
+
+
+    }
+
+    private boolean myAlgo(Board board, Tile tile) {
+        Tile dasFeld = tile;
+
+        int count = 0;
+        boolean res = false;
+        while (count < 4) {
+            Tile obigerTeil = new Tile(TileType.EMPTY, Orientation.UP);
+            if ((tiles.indexOf(dasFeld) / board.getWidth()) != 0) { //if its not in the first row
+                obigerTeil = tiles.get(tiles.indexOf(dasFeld) - board.getWidth());
+            }
+            Tile linkerTeil = new Tile(TileType.EMPTY, Orientation.UP);
+            if ((tiles.indexOf(dasFeld) % board.getWidth()) != 0) {  //if its not in the first column
+                linkerTeil = tiles.get(tiles.indexOf(dasFeld) - 1);
+            }
+            boolean links = false;
+            boolean oben = false;
+
+            if (linkerTeil.getSides()[2] == dasFeld.getSides()[0]) {
+                links = true;
+            }
+            if (obigerTeil.getSides()[3] == dasFeld.getSides()[1]) {
+                oben = true;
+            }
+
+            if (links & oben) {
+                if (tiles.indexOf(dasFeld) == tiles.size() - 1) return true; //if the last Tile
+                res = true && myAlgo(board, tiles.get(tiles.indexOf(dasFeld) + 1));
+                if (res) return true;
+            }
+//           tiles.set(0, board.rotate(tiles.indexOf(tile) % board.getWidth(), tiles.indexOf(tile) / board.getWidth()));
+            dasFeld.rotateTeil();
+            printGame(board);
+            System.out.println("------------------------");
+            count++;
+        }
+//        board.rotate(tiles.indexOf(tile) % board.getWidth(), tiles.indexOf(dasFeld) / board.getWidth());
+        dasFeld.rotateTeil();
+        return res;
+
+
+    }
+
+    public void printGame(Board board) {
+        int height = board.getHeight();
+        int width = board.getWidth();
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                System.out.print(board.getTiles().get(((h * 2) + w)));
+
+            }
+            System.out.println();
+        }
+    }
+
+    public List<Tile> getTiles() {
+        return tiles;
+    }
+}

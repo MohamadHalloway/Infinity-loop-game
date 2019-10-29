@@ -1,0 +1,88 @@
+package jpp.infinityloop;
+
+import java.util.*;
+import java.util.concurrent.TimeoutException;
+
+import static java.util.Collections.shuffle;
+
+public class Board {
+    private int width;
+    private int height;
+    private List<Tile> tiles;
+
+
+    public Board(int x, int y, List<Tile> z) {
+        width = x;
+        height = y;
+        tiles = z;
+
+    }
+
+    public boolean checkSolved() {
+        for (Tile tile : tiles) {
+            Tile neben = new Tile(TileType.EMPTY, Orientation.UP);
+            if ((tiles.indexOf(tile) % width) != width -1 ) {       //if its not in the last column
+                neben = tiles.get(tiles.indexOf(tile) + 1);
+            }
+            Tile unter = new Tile(TileType.EMPTY, Orientation.UP);
+            if ((tiles.indexOf(tile) / width) != height - 1){  //if its not in the last row
+                unter = tiles.get(tiles.indexOf(tile) + width);
+            }
+            boolean threeOclock = false;
+            boolean sixOclock =  false;
+            if (tile.getSides()[2] == neben.getSides()[0]) threeOclock = true;
+            if (tile.getSides()[3] == unter.getSides()[1]) sixOclock = true;
+            if ((threeOclock && sixOclock) == false) return false;
+
+        }
+        return true;
+
+
+    }
+
+    public void shuffle() {
+
+        for (Tile tile: tiles){
+            int r = new Random().nextInt(10);
+            rotate(tiles.indexOf(tile) % width, tiles.indexOf(tile) /width);
+        }
+    }
+
+    public Tile rotate(int x, int y) {
+        if (x >= width || x < 0 || y >= height || y < 0) {
+            throw new IllegalArgumentException("x or y is too big or under 0");
+        }
+        Tile gesucht = tiles.get((y * width) + x).rotate();
+        tiles.set((y * width) + x, gesucht);
+        return gesucht;
+
+    }
+
+    public List<Tile> getTiles() {
+        return tiles;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+//    private void tielsVerteilen(List<Tile> list) {   //taking care of the (0,0) or (length(),0) or .....etc.
+//        List<Tile> result = new ArrayList<>(list);
+//        for (int j = 0; j < height; j++) {
+//            for (int i = 0; i < width; i++) {
+//
+//            }
+//        }
+//    }
+
+    public List<Byte> divide(Byte mix) {
+        List<Byte> res = new ArrayList<>();
+        Byte tile1 = mix;
+        return res;
+    }
+
+}

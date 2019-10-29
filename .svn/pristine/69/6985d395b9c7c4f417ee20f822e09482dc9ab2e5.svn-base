@@ -1,0 +1,70 @@
+package jpp.infinityloop;
+
+import java.util.List;
+
+public class Tile {
+    private int hex;
+    final static byte links = 0b1000;
+    final static byte oben = 0b0100;
+    final static byte rechts = 0b0010;
+    final static byte unten = 0b0001;
+
+
+    public Tile(byte hex) {
+        this.hex = hex;
+    }
+
+
+
+    public void rotateTeil() {
+        this.hex = hex >> 1;
+    }
+
+
+    public int getHex() {
+        return hex;
+    }
+
+
+    @Override
+    public String toString() {
+        switch (hex) {
+            case 0:     //EMPTY
+                return "\u2007";
+            case 15:       //CROSS
+                return "\u254B";
+            case 5:  // STRAIGHT up oder down
+                return "\u2503";
+            case 10: // STRAIGHT left oder right
+                return "\u2501";
+            case 6:      //BEND up
+                return "\u2517";
+            case 9:      //BEND down
+                return "\u2513";
+            case 12:    //BEND left
+                return "\u251B";
+            case 3:    //BEND right
+                return "\u250F";
+            case 11: //TEE right
+                return "\u2533";
+            case 14:  //TEE left
+                return "\u253B";
+            case 13:  //TEE down
+                return "\u252B";
+            case 7:    //TEE up
+                return "\u2523";
+            case 2: //DEAD_END right
+                return "\u257A";
+            case 8:  //DEAD_END right
+                return "\u2578";
+            case 1:  //DEAD_END right
+                return "\u257B";
+            case 4:    //DEAD_END right
+                return "\u2579";
+        }
+        return "";
+    }
+
+
+
+}

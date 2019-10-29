@@ -1,0 +1,38 @@
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import jpp.infinityloop.Board;
+import jpp.infinityloop.generatoren.MatrixGenerator;
+
+public class Controller implements EventHandler {
+    private MatrixGenerator matrixGenerator = new MatrixGenerator(10, 10);
+    Board board = matrixGenerator.next();
+    public Pane rootPane = new TileGrid(board);
+    public VBox vBox;
+    public Button openBtn;
+    public Button shuffleBtn;
+    public Button nextBtn;
+    public Button solveBtn;
+    public Button saveBtn;
+    public Button SettingsBtn;
+    public Label labelGridPane;
+
+
+    @Override
+    public void handle(Event event) {
+        openBtn.setOnAction(event1 -> {
+            vBox.setStyle("-fx-background-color: red");
+            rootPane.setStyle("-fx-background-color: red");
+
+        });
+
+
+    }
+
+}

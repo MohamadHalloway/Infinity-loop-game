@@ -1,0 +1,302 @@
+package jpp.infinityloop;
+
+import javafx.scene.layout.BorderPane;
+import jpp.infinityloop.adapter.BlobCoder;
+import jpp.infinityloop.adapter.TestAdapter;
+import jpp.infinityloop.generatoren.BoardGenerator;
+import jpp.infinityloop.generatoren.FilesGenerator;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.util.*;
+
+
+
+/*1-was sind thresholds?
+ */
+
+public class MainTest {
+
+    public static void main(String[] args) {
+//        OutputStream out = System.out;
+//        PrintStream print = new PrintStream(out);
+//        print.write(10);
+//        print.println("\u221E");
+//        ByteArrayOutputStream array = new ByteArrayOutputStream();
+//        array.writeTo(out);
+//        System.out.println(array);
+//        System.out.println( "\\u" + Integer.toHexString('|' | 0x10000).substring(1) );
+//        byte b = 0x0c;
+//        byte d = (byte) 0xDF;
+//        byte b2 = 0x0A;
+//        byte mix = (byte) ((b << 4) | (b2 & 0x0F));
+//        byte tile1 = (byte) ((d >> 4) & 0x0F);
+//        byte tile2 = (byte) ((d) & 0x0f);
+//        System.out.println(Integer.toHexString(tile1).equals("d"));
+//        MainTest mainTest = new MainTest();
+//        byte[] width = {0x02,0x00,0x00};
+//        byte[] blabla = {(byte)0xe2,(byte) 0x88,(byte) 0x9e};
+//        byte khara = mainTest.mix(mainTest.mix(blabla[0], blabla[1]), blabla[2]);
+//        System.out.println("Khara ist: " + Integer.toHexString(khara));
+//         int blablaInt = mainTest.byteToInt(blabla);
+//         char c = (char) blablaInt;
+//        System.out.println("C: " + c);
+//        System.out.println(Character.toString(c) == "0x221E");
+//        System.out.println(mainTest.byteToInt(width));
+//        String[] res = mainTest.hexarray(blabla);
+//        for (String s : res){
+//            System.out.println(s);
+//        }
+//        String s = String.format("%8s", Integer.toBinaryString(b2 & 0xFF)).replace(' ', '0');
+//        System.out.println(s);
+//        System.out.println(mainTest.byteToInt(width));
+        MainTest mainTest = new MainTest();
+        int count = 1;
+        byte[] encodedBoard = {(byte) 0xe2, (byte) 0x88, (byte) 0x9e, 3, 0, 0, 0, 2, 0, 0, 0, (byte) 0x31, (byte) 0x11, (byte) 0x13};
+        BlobCoder blobCoder = new BlobCoder();
+        Board board = blobCoder.decode(encodedBoard);
+        System.out.println(board);
+        byte[] testEncode = blobCoder.encode(board);
+        System.out.println(Arrays.toString(mainTest.hexarray(testEncode)));
+        BoardGenerator boardGenerator = new FilesGenerator();
+        Board board1 = boardGenerator.next();
+//        System.out.println( count + "\n" + board1);
+//        count++;
+        Board board2 = boardGenerator.next();
+//        System.out.println( count + "\n" + board2);
+//        count++;
+        Board board3 = boardGenerator.next();
+//        System.out.println( count + "\n" + board3);
+//        count++;
+        Board board4 = boardGenerator.next();
+//        System.out.println( count + "\n" + board4);
+//        count++;
+        Board board5 = boardGenerator.next();
+//        System.out.println( count + "\n" + board5);
+//        count++;
+        Board board6 = boardGenerator.next();
+//        System.out.println( count + "\n" + board6);
+//        count++;
+        Board board7 = boardGenerator.next();
+//        System.out.println( count + "\n" + board7);
+//        count++;
+//        System.out.println("Here starts the Algo!");
+        BacktrackingSolver backtrackingSolver = new BacktrackingSolver();
+//        System.out.println(backtrackingSolver.solve(board7));
+
+
+
+
+            //solve testing
+//        TestAdapter testAdapter = new TestAdapter();
+//        testAdapter.initGenerator(4, 10, 4, 10);
+//        Board board = testAdapter.generate();
+//        System.out.println(board);
+//        System.out.println(testAdapter.solve(board));
+//        System.out.println(board.checkSolved());
+
+
+
+
+
+
+
+//        System.out.println("width of Board: "+ board.getWidth());
+//        System.out.println( "height of board: "+ board.getHeight());
+//        System.out.println(board);
+//        Scanner scanner = new Scanner(System.in);
+
+//        while (!board.checkSolved()){
+//            System.out.println("Enter coordinate of the tile to rotate: ");
+//            int s = scanner.nextInt();
+//            int x = s % 10;
+//            int y = s / 10;
+//            board.rotate(x, y);
+//            System.out.println(board);
+//        }
+//        System.out.println("Board solved!");
+    }
+
+
+
+
+
+    //    public Board generate(int x, int y){
+//        List<Tile> result = new ArrayList<>();
+//        byte[][] byteBoard = new byte[y][x];
+//        int[] sides = {0,0,0,0};
+//        for (int h = 0; h < y ; h++){
+//            for (int w = 0; w < x ; w++){
+//                //if in the first column
+//                if (w == 0){
+//                    sides[0] = 0;
+//                }
+//                else {
+//                    if (oneOrZero((byteBoard[h][w-1] & Tile.rechts)) != 0) sides[0] = 1;    //what the right side needs
+//                    else sides[0] = 0;
+//                }
+//                //if in the last column
+//                if (w == x - 1){
+//                    sides[2] = 0;
+//                }
+//                else {
+//                    sides[2] = new Random().nextInt(2);
+//                }
+//
+//
+//                //if in the first row
+//                if (h == 0){
+//                    sides[1] = 0;
+//                }
+//                else {
+//                    if (oneOrZero((byteBoard[h-1][w] & Tile.unten)) != 0) sides[1] = 1; //what the upper side needs
+//                    else {
+//                        sides[1] = 0;
+//                    }
+//                }
+//
+//                //if in the last row
+//                if (h == y -1){
+//                    sides[3] = 0;
+//                }
+//                else {
+//                    sides[3] = new Random().nextInt(2);
+//                }
+//
+//                //find the type of tile
+//                int type = 0;
+//                for (int i = 0; i < 4; i++){
+//                    type += sides[i];
+//                }
+//                //making a different between STRAIGHT and BEND
+//                if (type == 2 && (sides[0] == sides[2])) { //if it was STRAIGHT
+//                    type = 5;
+//                }
+//                Tile tile = new Tile(type);
+//                boolean erledigt = false;
+//                while (erledigt == false){
+//                    if ((oneOrZero(tile.getHex() & Tile.links)) != sides[0]){
+//                        tile.rotateTeil();
+//                        continue;
+//                    }
+//                    if ((oneOrZero(tile.getHex() & Tile.oben)) != sides[1]){
+//                        tile.rotateTeil();
+//                        continue;
+//                    }
+//                    if ((oneOrZero(tile.getHex() & Tile.rechts)) != sides[2]) {
+//                        tile.rotateTeil();
+//                        continue;
+//                    }
+//                    if ((oneOrZero(tile.getHex() & Tile.unten)) != sides[3]){
+//                        tile.rotateTeil();
+//                        continue;
+//                    }
+//                    erledigt = true;
+//                }
+//
+//                byteBoard[h][w] = tile.getHex();
+//                result.add(tile);
+//                for (int i = 0; i < sides.length ; i++){
+//                    sides[i] = 0;
+//                }
+////                for(int j = 0 ; j < y; j++){
+////                    for(int i = 0 ; i < x ; i++){
+////                        if ((y*x) < result.size()){
+////                            System.out.print(result.get(y*x));
+////                        }
+////                    }
+////
+////                    System.out.println();
+////                }
+//            }
+//        }
+//
+//        Board board = new Board(x, y, result);
+//        return board;
+//    }
+    public void printGame(Board board) {
+        int height = board.getHeight();
+        int width = board.getWidth();
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                System.out.print(board.getTiles().get(((h * 2) + w)));
+
+            }
+            System.out.println();
+        }
+    }
+
+    public byte[] separate(byte mixed) {
+        byte[] result = new byte[2];
+        result[0] = (byte) ((mixed >> 4) & 0x0F);
+        result[1] = (byte) ((mixed) & 0x0f);
+        return result;
+    }
+
+    public byte mix(byte b1, byte b2) {
+        byte mixed = (byte) ((b1 << 4) | (b2 & 0x0F));
+        return mixed;
+    }
+
+    public String[] hexarray(byte[] byteArray) {
+        String[] result = new String[byteArray.length];
+
+        for (int i = 0; i < byteArray.length; i++){
+            result[i] = Integer.toHexString(byteArray[i]);
+        }
+        return result;
+    }
+
+    public int byteToInt(byte[] bytes) {
+        int val = 0;
+//        for (int i = 0; i < bytes.length; i++) {
+        for (int i = bytes.length - 1; i >= 0; i--) {
+            val = val << 8;
+            val = val | (bytes[i] & 0xFF);
+        }
+        return val;
+    }
+
+    public String toHex(String arg) {
+        return String.format("%040x", new BigInteger(1, arg.getBytes(/*YOUR_CHARSET?*/)));
+    }
+
+    public int oneOrZero(int n) {
+        if (n == 0) return 0;
+        else return 1;
+    }
+
+//    public byte[] intToByteArray(int number) {
+//        byte[] numberBytes = ByteBuffer.allocate(4).putInt(number).array();
+//        byte[] temp = new byte[4];
+//        int count = 0;
+//        for (int i = numberBytes.length - 1; i > 0; i--) {
+//            temp[count] = numberBytes[i];
+//            count++;
+//        }
+//        return temp;
+//    }
+public byte[] intToByteArray(int number) {
+    if (number > 508 || number < 0) throw new IllegalStateException("width or height doesn't match");
+    byte[] b = new byte[4];
+    int count  = 0;
+    while (count < 4){
+        if (number > 127){
+            b[count] = 127;
+            number -= 127;
+            count++;
+        }
+        else {
+            b[count] = (byte) number;
+            number = 0;
+            count++;
+        }
+    }
+    return b;
+}
+}

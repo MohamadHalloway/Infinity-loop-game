@@ -1,0 +1,187 @@
+package jpp.infinityloop.adapter;
+
+import jpp.infinityloop.Board;
+import jpp.infinityloop.Orientation;
+import jpp.infinityloop.Tile;
+import jpp.infinityloop.TileType;
+
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+public class BlobCoder {
+    public Board decode(byte[] data){
+        //initializing
+        byte[] infinitySymbol = {(byte)0xe2, (byte) 0x88, (byte)0x9e};
+        int index = 0;
+        for (byte b : infinitySymbol){
+            if (data[index] != b) throw new IllegalArgumentException();
+            index++;
+        }
+        byte[] widthByte = new byte[3];
+        byte[] heightByte = new byte[3];
+        List<Tile> tiles = new ArrayList<>();
+        int count = 0;
+        for (int i = 3; i < 6; i++){
+            widthByte[count] = data[i];
+            count++;
+        }
+        count = 0;
+        for (int i = 6; i < 9; i++){
+            heightByte[count] = data[i];
+            count++;
+        }
+        int width = byteToInt(widthByte);
+        int height = byteToInt(heightByte);
+
+
+        for (int i = 9; i < data.length; i++){      //turning the Bytes in Tiles and adding them to the List
+            byte[] both = separate(data[i]);
+            Tile tile1 = declareTile(Integer.toHexString(both[0]));
+            Tile tile2 = declareTile(Integer.toHexString(both[1]));
+            tiles.add(tile1);
+            tiles.add(tile2);
+        }
+        Board result = new Board(width, height, tiles);
+        return result;
+    }
+
+    public byte[] encode(Board board){
+        byte[] result = new byte[ 9 + (board.getTiles().size()/2)];
+
+        //get free from the even and odd length
+        if (board.getTiles().size() % 2 != 0){
+            board.getTiles().add(new Tile(TileType.EMPTY, Orientation.UP));
+        }
+        //infinity symbol coding
+        int index = 0;
+        byte[] infinitySymbol = {(byte)0xe2, (byte) 0x88, (byte)0x9e};
+        for (byte b : infinitySymbol){
+            result[index] = b;
+            index++;
+        }
+
+
+        int count = 0;
+        Iterator<Tile> iterator = board.getTiles().iterator();
+
+        //widht and height in byte[] converted and add to result
+        byte[] widthBytes = intToByteArray(board.getWidth());
+        for (int i = 3; i < 6; i++){
+            result[i] = widthBytes[count];
+            count++;
+        }
+        count = 0;
+        byte[] heightBytes = intToByteArray(board.getHeight());
+        for (int i = 6; i < 9; i++){
+            result[i] = heightBytes[count];
+            count++;
+        }
+        count = 0;
+        //decoding the Tiles
+        for (int i = 9; i < result.length ; i++){
+            byte res = mix(board.getTiles().get(count).getHex(), board.getTiles().get(count + 1).getHex());
+            result[i] = res;
+            count += 2;
+        }
+        return result;
+
+    }
+
+
+
+    public byte[] separate(byte mixed) {
+        byte[] result = new byte[2];
+        result[0] = (byte) ((mixed >> 4) & 0x0F);
+        result[1] = (byte) ((mixed) & 0x0f);
+        return result;
+    }
+
+    public byte mix(byte b1, byte b2) {
+        byte mixed = (byte) ((b1 << 4) | (b2 & 0x0F));
+        return mixed;
+    }
+
+    public String[] hexarray(byte[] byteArray) {
+        String[] result = new String[2];
+        result[0] = Integer.toHexString(byteArray[0]);
+        result[1] = Integer.toHexString(byteArray[1]);
+        return result;
+    }
+
+    public int byteToInt(byte[] bytes) {
+        int val = 0;
+//        for (int i = 0; i < bytes.length; i++) {
+        for (int i = bytes.length-1; i >= 0; i--) {
+            val=val<<8;
+            val=val|(bytes[i] & 0xFF);
+        }
+        return val;
+    }
+
+    public Tile declareTile(String hex){
+        Tile result = null;
+        switch (hex){
+            case "1":
+                result = new Tile(TileType.DEAD_END,Orientation.DOWN);
+                break;
+            case "2":
+                result = new Tile(TileType.DEAD_END,Orientation.RIGHT);
+                break;
+            case "3":
+                result = new Tile(TileType.BEND,Orientation.RIGHT);
+                break;
+            case "4":
+                result = new Tile(TileType.DEAD_END,Orientation.UP);
+                break;
+            case "5":
+                result = new Tile(TileType.STRAIGHT,Orientation.UP);
+                break;
+            case "6":
+                result = new Tile(TileType.BEND,Orientation.UP);
+                break;
+            case "7":
+                result = new Tile(TileType.TEE,Orientation.UP);
+                break;
+            case "8":
+                result = new Tile(TileType.DEAD_END,Orientation.LEFT);
+                break;
+            case "9":
+                result = new Tile(TileType.BEND,Orientation.DOWN);
+                break;
+            case "a":
+                result = new Tile(TileType.STRAIGHT,Orientation.LEFT);
+                break;
+            case "b":
+                result = new Tile(TileType.TEE,Orientation.RIGHT);
+                break;
+            case "c":
+                result = new Tile(TileType.BEND,Orientation.LEFT);
+                break;
+            case "d":
+                result = new Tile(TileType.TEE,Orientation.DOWN);
+                break;
+            case "e":
+                result = new Tile(TileType.TEE,Orientation.LEFT);
+                break;
+            case "f":
+                result = new Tile(TileType.CROSS,Orientation.DOWN);
+                break;
+            default:
+                result = new Tile(TileType.EMPTY, Orientation.UP);
+        }
+        return result;
+    }
+    public byte[] intToByteArray(int number){
+        byte[] numberBytes = ByteBuffer.allocate(4).putInt(number).array();
+        byte[] temp = new byte[3];
+        int count = 0;
+        for (int i = numberBytes.length - 1 ; i > 0; i--){
+            temp[count] = numberBytes[i];
+            count++;
+        }
+        return temp;
+    }
+}

@@ -1,0 +1,63 @@
+package jpp.infinityloop.GUI;
+
+import javafx.scene.image.Image;
+import jpp.infinityloop.Tile;
+
+import javax.swing.text.html.ImageView;
+
+public class Images {
+
+    private Image image;
+    private Tile kachelAufDemBild;
+
+    public Images(Tile tile) {
+        int type = 0;
+        byte[] sides = {Tile.links, Tile.oben, Tile.rechts, Tile.unten};
+        int[] binary = {0, 0, 0, 0};
+        for (int i = 0; i < 4; i++) {
+            if ((tile.getHex() & sides[i]) != 0) {
+                binary[i] = 1;
+                type++;
+            }
+        }
+        if (type == 2 && binary[0] == binary[2]) {
+            type = 5;
+        }
+        switch (type) {
+            case 0:
+                image = new Image(getClass().getResourceAsStream("/pngTiles/empty.png"));
+                kachelAufDemBild = new Tile((byte)0);
+                break;
+            case 1:
+                image = new Image(getClass().getResourceAsStream("/pngTiles/deadend.png"));
+                kachelAufDemBild = new Tile((byte) 0b1000);
+                break;
+            case 2:
+                image = new Image(getClass().getResourceAsStream("/pngTiles/bend.png"));
+                kachelAufDemBild = new Tile((byte) 0b1100);
+                break;
+            case 3:
+                image = new Image(getClass().getResourceAsStream("/pngTiles/tee.png"));
+                kachelAufDemBild = new Tile((byte) 0b1110);
+                break;
+            case 4:
+                image = new Image(getClass().getResourceAsStream("/pngTiles/cross.png"));
+                kachelAufDemBild = new Tile((byte) 0b1111);
+
+                break;
+            case 5:
+                image = new Image(getClass().getResourceAsStream("/pngTiles/straight.png"));
+                kachelAufDemBild = new Tile((byte) 0b1010);
+                break;
+        }
+
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public Tile getKachelAufDemBild() {
+        return kachelAufDemBild;
+    }
+}

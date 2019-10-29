@@ -1,0 +1,16 @@
+package jpp.infinityloop.GUI;
+
+import java.awt.*;
+
+public class MenuButton extends Button {
+
+//    public static Button open(){
+//        Button open = new Button();
+//        return open;
+//    }
+//    public static Button shuffle(){
+//        Button shuffle = new Button();
+//
+//    }
+
+}

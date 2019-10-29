@@ -1,0 +1,176 @@
+package jpp.infinityloop;
+
+import jpp.infinityloop.adapter.TestAdapter;
+
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+public class BacktrackingSolver implements Solver {
+    Board board;
+    Tile[][] boardArray;
+
+
+    @Override
+    public boolean solve(Board board) {
+        this.board = board;
+        boardArray = board.getBoardArray();
+        boolean res = myAlgo(0, 0);
+        return res;
+
+
+    }
+
+    private boolean myAlgo(int x, int y) {
+        Tile tile = boardArray[y][x];
+        int hex = tile.getHex();
+        int height = board.getHeight();
+        int width = board.getWidth();
+        int xnext = 0;
+        int ynext = 0;
+        if (x == width - 1) {    //if in the last column
+            if (y == height - 1) {       //if in the last field
+                xnext = -1; //when tile the last field in the game
+            } else {
+                xnext = 0;
+                ynext = y + 1;
+            }
+        } else {
+            xnext = x + 1;
+            ynext = y;
+        }
+        boolean isTee = false;
+        if (hex == 0b1011 || hex == 0b1110|| hex == 0b0111 || hex == 0b1101){
+            isTee = true;
+        }
+
+        int count = 0;
+        if (hex == 0x0f || hex == 0x0) count = 3; //if it was Cross or empty
+        while (count < 4) {
+            boolean links = nineOclock(x, y, tile);
+            boolean oben = twelveOclock(x, y, tile);
+            if (x == width - 1) {     //last column and last tile
+                if (y == height - 1) {   //last field
+                    if (oben && links && (hex & Tile.rechts) == 0 && (hex & Tile.unten) == 0) {
+                        return true;
+                    } else {
+                        tile.rotateTeil();
+                        count++;
+                        continue;
+                    }
+                }
+                if (isTee){
+                    tile.setHex((byte)0b1101);
+                }
+                if (oben && links && (hex & Tile.rechts) == 0) {
+                    if (myAlgo(xnext, ynext)) return true;
+                }
+            } else if (y == height - 1) {    //last row
+                if (oben && links && (hex & Tile.unten) == 0) {
+                    if (myAlgo(xnext, ynext)) return true;
+                }
+            } else {
+                if (oben && links) {
+                    if (myAlgo(xnext, ynext)) {
+                        return true;
+                    }
+                }
+            }
+            tile.rotateTeil();
+            count++;
+//            for (int j = 0; j <= y; j++) {
+//                for (int i = 0; i < x; i++) {
+//                    System.out.print(boardArray[j][i]);
+//                }
+//                System.out.println();
+//            }
+//            if (x == board.getWidth() - 1){
+//                if (links && oben && (tile.getHex() & Tile.rechts) != 0) {
+//                    if (xnext >= 0) {
+//                        if (myAlgo(xnext, ynext)) {
+//                            return true;
+//                        }
+//                    } else {
+//                        if ((tile.getHex() & Tile.unten) > 0 || (tile.getHex() & Tile.rechts) > 0) return false;
+//                        else {
+//                            return true;
+//                        }
+//                    }
+//                }
+//            } else if (y == board.getHeight()){
+//                if (links && oben && (tile.getHex() & Tile.unten) != 0) {
+//                    if (xnext >= 0) {
+//                        if (myAlgo(xnext, ynext)) {
+//                            return true;
+//                        }
+//                    } else {
+//                        if ((tile.getHex() & Tile.unten) > 0 || (tile.getHex() & Tile.rechts) > 0) return false;
+//                        else {
+//                            return true;
+//                        }
+//                    }
+//                }
+//            }else {
+//                if (links && oben) {
+//                    if (xnext >= 0) {
+//                        if (myAlgo(xnext, ynext)) {
+//                            return true;
+//                        }
+//                    } else {
+//                        if ((tile.getHex() & Tile.unten) > 0 || (tile.getHex() & Tile.rechts) > 0) return false;
+//                        else {
+//                            return true;
+//                        }
+//                    }
+//                }
+//
+//            }
+//
+//
+//            tile.rotateTeil();
+//            count++;
+        }
+        return false;
+    }
+
+
+    private Tile getObigerTeil(int x, int y) {
+        Tile obigerTeil = new Tile((byte) 0);
+        if (y != 0) {
+            obigerTeil = boardArray[y - 1][x];
+        }
+        return obigerTeil;
+    }
+
+    private Tile getLinkerTeil(int x, int y) {
+        Tile linkerTeil = new Tile((byte) 0);
+        if (x != 0) {
+            linkerTeil = boardArray[y][x - 1];
+        }
+        return linkerTeil;
+    }
+
+    private boolean nineOclock(int x, int y, Tile tile) {
+        Tile linkerTeil = getLinkerTeil(x, y);
+        int links = tile.getHex() & Tile.links;
+        int rechts = linkerTeil.getHex() & Tile.rechts;
+        if (links == 0 && rechts == 0) {
+            return true;
+        } else if (links > 0 && rechts > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean twelveOclock(int x, int y, Tile tile) {
+        Tile obigerTeil = getObigerTeil(x, y);
+        int oben = tile.getHex() & Tile.oben;
+        int unten = obigerTeil.getHex() & Tile.unten;
+        if (oben == 0 && unten == 0) return true;
+        else if (oben > 0 && unten > 0) return true;
+        else return false;
+    }
+}

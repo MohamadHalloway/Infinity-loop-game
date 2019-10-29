@@ -1,0 +1,93 @@
+package jpp.infinityloop;
+
+import jpp.infinityloop.adapter.TestAdapter;
+
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+public class BacktrackingSolver implements Solver {
+    Iterator<Tile> iterator;
+    Board board;
+
+
+    @Override
+    public boolean solve(Board board) {
+        this.board = board;
+        this.iterator = board.getTiles().iterator();
+        boolean res = myAlgo(iterator.next());
+        printGame(board);
+        return res;
+
+
+    }
+
+    private boolean myAlgo(Tile tile) {
+        Tile obigerTeil = getObigerTeil(tile);
+        Tile linkerTeil = getLinkerTeil(tile);
+        Tile next = null;
+        if (!board.getTiles().get(board.getTiles().size() - 1).equals(tile)) next = board.getTiles().get(board.getTiles().indexOf(tile) + 1);
+
+        boolean res = false;
+        int count = 0;
+        while (count < 4) {
+            boolean links = false;
+            boolean oben = false;
+
+            if (linkerTeil.getSides()[2] == tile.getSides()[0]) {
+                links = true;
+            }
+            if (obigerTeil.getSides()[3] == tile.getSides()[1]) {
+                oben = true;
+            }
+
+            if (links & oben) {
+                if (next != (null)) {
+//                    if (tile.getSides()[3] || tile.getSides()[2]) return false;
+//                    else return true;
+                   res = true && myAlgo(next);
+                }
+
+                if (res) return true;
+            }
+//           tiles.set(0, board.rotate(tiles.indexOf(tile) % board.getWidth(), tiles.indexOf(tile) / board.getWidth()));
+            tile.rotateTeil();
+            count++;
+        }
+//        board.rotate(tiles.indexOf(tile) % board.getWidth(), tiles.indexOf(dasFeld) / board.getWidth());
+        tile.rotateTeil();
+        return res;
+
+
+    }
+
+    public void printGame(Board board) {
+        int height = board.getHeight();
+        int width = board.getWidth();
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                System.out.print(board.getTiles().get(((h * 2) + w)));
+
+            }
+            System.out.println();
+        }
+    }
+
+    private Tile getObigerTeil(Tile tile) {
+        Tile obigerTeil = new Tile(TileType.EMPTY, Orientation.UP);
+        if ((board.getTiles().indexOf(tile) / board.getWidth()) != 0) { //if its not in the first row
+            obigerTeil = board.getTiles().get(board.getTiles().indexOf(tile) - board.getWidth());
+        }
+        return obigerTeil;
+    }
+
+    private Tile getLinkerTeil(Tile tile) {
+        Tile linkerTeil = new Tile(TileType.EMPTY, Orientation.UP);
+        if ((board.getTiles().indexOf(tile) % board.getWidth()) != 0) {  //if its not in the first column
+            linkerTeil = board.getTiles().get(board.getTiles().indexOf(tile) - 1);
+        }
+        return linkerTeil;
+    }
+}

@@ -1,0 +1,117 @@
+package jpp.infinityloop.adapter;
+
+import jpp.infinityloop.Board;
+import jpp.infinityloop.Orientation;
+import jpp.infinityloop.Tile;
+import jpp.infinityloop.TileType;
+
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+
+public class BlobCoder {
+    public Board decode(byte[] data) {
+
+        if (data.length < 11) {
+            throw new IllegalArgumentException();
+        }
+//        System.out.println(Arrays.toString(hexarray(data)));
+        //initializing
+        byte[] infinitySymbol = {(byte) 0xe2, (byte) 0x88, (byte) 0x9e};
+        for (int i = 0; i < infinitySymbol.length; i++) {
+            if (data[i] != infinitySymbol[i]) {
+                throw new IllegalArgumentException();
+            }
+        }
+        //width and height
+        byte[] widthBytes = {data[3], data[4], data[5], data[6]};
+        int width = byteArrayToInt(widthBytes);
+        byte[] heightBytes = {data[7], data[8], data[9], data[10]};
+        int height = byteArrayToInt(heightBytes);
+        //turning the Bytes in Tiles and adding them to the List
+        List<Tile> tiles = new ArrayList<>();
+        for (int i = 11; i < data.length; i++) {
+//            if ((data[i] >> 8) > 0) throw new IllegalArgumentException();
+            byte[] both = separate(data[i]);
+            Tile tile1 = new Tile(both[0]);
+            Tile tile2 = new Tile(both[1]);
+            tiles.add(tile1);
+            tiles.add(tile2);
+        }
+        Board result = new Board(width, height, tiles);
+        return result;
+
+    }
+
+    public byte[] encode(Board board) {
+        if (board.getTiles().size() < 2) {
+            throw new IllegalArgumentException("Board has less than two tiles");
+        }
+        //get free from the even and odd length
+        if (board.getTiles().size() % 2 != 0) {
+            Tile scam = new Tile(0x0);
+            board.getTiles().add(scam);
+        }
+        byte[] result = new byte[11 + (board.getTiles().size() / 2)];
+        //infinity symbol coding
+        byte[] infinitySymbol = {(byte) 0xe2, (byte) 0x88, (byte) 0x9e};
+        for (int i = 0; i < infinitySymbol.length; i++) {
+            result[i] = infinitySymbol[i];
+        }
+
+
+        int count = 0;
+
+        //widht and height in byte[] converted and add to result
+        byte[] widthBytes = intToByteArray(board.getWidth());
+        for (int i = 3; i < 7; i++) {
+            result[i] = widthBytes[count];
+            count++;
+        }
+        count = 0;
+        byte[] heightBytes = intToByteArray(board.getHeight());
+        for (int i = 7; i < 11; i++) {
+            result[i] = heightBytes[count];
+            count++;
+        }
+        //encoding the Tiles
+        Iterator<Tile> iterator = board.getTiles().iterator();
+        for (int i = 11; i < result.length; i++) {
+            Tile tile1 = iterator.next();
+            Tile tile2 = iterator.next();
+            byte res = mix(tile1.getHex(), tile2.getHex());
+            result[i] = res;
+        }
+        return result;
+
+    }
+
+
+    public byte[] separate(byte mixed) {
+        byte[] result = new byte[2];
+        result[0] = (byte) ((mixed >> 4) & 0x0F);
+        result[1] = (byte) ((mixed) & 0x0f);
+        return result;
+    }
+
+    public byte mix(byte b1, byte b2) {
+        byte mixed = (byte) ((b1 << 4) | (b2 & 0x0F));
+        return mixed;
+    }
+    public byte[] intToByteArray(int x) {
+        byte b1 = (byte) ((x >> 24) & 0xff);
+        byte b2 = (byte) ((x >> 16) & 0xff);
+        byte b3 = (byte) ((x >> 8) & 0xff);
+        byte b4 = (byte) (x & 0xff);
+        byte[] b = {b4, b3, b2, b1};
+        return b;
+    }
+
+    public int byteArrayToInt(byte[] array) {
+        int x = array[3] << 24 | (array[2] << 16 | (array[1] << 8 | (array[0])));
+        return x;
+    }
+}

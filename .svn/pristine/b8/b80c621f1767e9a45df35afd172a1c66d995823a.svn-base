@@ -1,0 +1,67 @@
+package jpp.infinityloop;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+import static java.util.Collections.shuffle;
+
+public class Board {
+    int width;
+    int height;
+    List<Tile> tiles;
+
+
+    public Board(int x, int y, List<Tile> z) {
+        width = x;
+        height = y;
+        tiles = z;
+
+    }
+
+    public boolean checkSolved() {
+        BacktrackingSolver backtrackingSolver = new BacktrackingSolver();
+        return backtrackingSolver.solve(this);
+    }
+
+    public void shuffle() {
+        Collections.shuffle(this.tiles);
+    }
+
+    public void rotate(int x, int y) {
+        if (x >= width || x < 0 || y >= height || y < 0){
+            throw new IllegalArgumentException("x or y is too big or under 0");
+        }
+        Tile gesucht = tiles.get((y * width) + x);
+        gesucht.rotate();
+    }
+
+    public List<Tile> getTiles() {
+        return tiles;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    private void tielsVerteilen(List<Tile> list) {   //taking care of the (0,0) or (length(),0) or .....etc.
+        List<Tile> result = new ArrayList<>(list);
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+
+            }
+        }
+    }
+
+    public List<Byte> divide(Byte mix) {
+        List<Byte> res = new ArrayList<>();
+        Byte tile1 = mix;
+        return res;
+    }
+
+}

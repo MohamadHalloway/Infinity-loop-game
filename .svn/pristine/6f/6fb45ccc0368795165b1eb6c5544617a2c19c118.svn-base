@@ -1,0 +1,8 @@
+package jpp.infinityloop;
+
+public class BacktrackingSolver implements Solver {
+    @Override
+    public boolean solve(Board board) {
+        return false;
+    }
+}

@@ -1,0 +1,23 @@
+package jpp.infinityloop.generatoren;
+
+import jpp.infinityloop.Board;
+
+public class MatrixGenerator implements BoardGenerator {
+    private int widthFactory, heightFactory;
+
+    public MatrixGenerator(Board board){
+        widthFactory = board.getWidth();
+        heightFactory = board.getHeight();
+    }
+
+
+    @Override
+    public Board next() {
+        return null;
+    }
+
+    @Override
+    public boolean hasnext() {
+        return true;
+    }
+}

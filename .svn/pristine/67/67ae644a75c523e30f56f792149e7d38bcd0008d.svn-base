@@ -1,0 +1,96 @@
+package jpp.infinityloop;
+
+import jpp.infinityloop.adapter.TestAdapter;
+
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+public class BacktrackingSolver implements Solver {
+    Board board;
+
+
+    @Override
+    public boolean solve(Board board) {
+        this.board = board;
+        System.out.println(board);
+        boolean res = myAlgo(board.getTiles().get(0));
+        System.out.println(board);
+        return res;
+
+
+    }
+
+    private boolean myAlgo(Tile tile) {
+
+        Tile next = null;       //when tile the last field in the game
+        if (!board.getTiles().get(board.getTiles().size() - 1).equals(tile)) { //else
+            next = board.getTiles().get(board.getTiles().indexOf(tile) + 1);
+        }
+
+        int count = 0;
+        while (count < 4) {
+            boolean links = nineOclock(tile);
+            boolean oben = twelveOclock(tile);
+
+
+            if (links && oben) {
+                if (next != (null)) {
+                    if (myAlgo(next)) {
+                        return true;
+                    }
+                } else {
+                    if ((tile.getHex() & Tile.unten) > 0 || (tile.getHex() & Tile.rechts) > 0) return false;
+                    else {
+                        return true;
+                    }
+                }
+            }
+            tile.rotateTeil();
+            count++;
+
+        }
+        return false;
+    }
+
+
+    private Tile getObigerTeil(Tile tile) {
+        Tile obigerTeil = new Tile((byte) 0);
+        if ((board.getTiles().indexOf(tile) / board.getWidth()) != 0) { //if its not in the first row
+            obigerTeil = board.getTiles().get(board.getTiles().indexOf(tile) - board.getWidth());
+        }
+        return obigerTeil;
+    }
+
+    private Tile getLinkerTeil(Tile tile) {
+        Tile linkerTeil = new Tile((byte) 0);
+        if ((board.getTiles().indexOf(tile) % board.getWidth()) != 0) {  //if its not in the first column
+            linkerTeil = board.getTiles().get(board.getTiles().indexOf(tile) - 1);
+        }
+        return linkerTeil;
+    }
+
+    private boolean nineOclock(Tile tile) {
+        Tile linkerTeil = getLinkerTeil(tile);
+        int links = tile.getHex() & Tile.links;
+        int rechts = linkerTeil.getHex() & Tile.rechts;
+        if (links == 0 && rechts == 0) {
+            return true;
+        } else if (links > 0 && rechts > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean twelveOclock(Tile tile){
+        Tile obigerTeil = getObigerTeil(tile);
+        int oben = tile.getHex() & Tile.oben;
+        int unten = obigerTeil.getHex() & Tile.unten;
+        if (oben == 0 && unten == 0) return true;
+        else if (oben > 0 && unten > 0) return true;
+        else return false;
+    }
+}

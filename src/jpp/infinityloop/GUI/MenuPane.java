@@ -1,0 +1,19 @@
+package jpp.infinityloop.GUI;
+
+import javafx.scene.layout.FlowPane;
+
+import java.awt.*;
+
+public class MenuPane extends FlowPane {
+    private Button openEventProperty;
+    private Button shuffleEventProperty;
+    private Button nextEventProperty;
+    private Button solveEventProperty;
+    private Button saveEventProperty;
+
+
+
+    public MenuPane(){
+//        Button open = MenuButton.open();
+    }
+}

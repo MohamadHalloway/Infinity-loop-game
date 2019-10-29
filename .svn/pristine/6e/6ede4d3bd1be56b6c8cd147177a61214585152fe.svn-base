@@ -1,0 +1,92 @@
+package jpp.infinityloop;
+
+import jpp.infinityloop.adapter.TestAdapter;
+
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+public class BacktrackingSolver implements Solver {
+    Board board;
+
+
+    @Override
+    public boolean solve(Board board) {
+        this.board = board;
+        System.out.println(board);
+        boolean res = myAlgo(board.getTiles().get(0));
+        System.out.println(board);
+        return res;
+
+
+    }
+
+    private boolean myAlgo(Tile tile) {
+//        System.out.println("new step");
+        Tile obigerTeil = getObigerTeil(tile);
+        Tile linkerTeil = getLinkerTeil(tile);
+        Tile next = null;       //when tile the last field in the game
+        if (!board.getTiles().get(board.getTiles().size() - 1).equals(tile)) { //else
+            next = board.getTiles().get(board.getTiles().indexOf(tile) + 1);
+        }
+
+        int count = 0;
+        while (count < 4) {
+//            System.out.println("loop");
+            boolean links = false;
+            boolean oben = false;
+
+            if (linkerTeil.getSides()[2] == tile.getSides()[0]) {
+                links = true;
+            }
+            if (obigerTeil.getSides()[3] == tile.getSides()[1]) {
+                oben = true;
+            }
+
+            if (links && oben) {
+//                System.out.println("right orientation");
+                if (next != (null)) {
+//                    System.out.println("next");
+//                    if (tile.getSides()[3] || tile.getSides()[2]) return false;
+//                    else return true;
+                    if(  myAlgo(next)){
+//                        System.out.println("success backstep");
+                        return true;
+                    }
+                }else{
+//                    System.out.println("last");
+                    if (tile.getSides()[2] || tile.getSides()[3]) return false;
+                    else{ return true;}
+                }
+            }
+//           tiles.set(0, board.rotate(tiles.indexOf(tile) % board.getWidth(), tiles.indexOf(tile) / board.getWidth()));
+//            System.out.println(board);
+//            System.out.println();
+            tile.rotateTeil();
+            count++;
+
+        }
+//        board.rotate(tiles.indexOf(tile) % board.getWidth(), tiles.indexOf(dasFeld) / board.getWidth());
+        //tile.rotateTeil();
+        return false;
+    }
+
+
+    private Tile getObigerTeil(Tile tile) {
+        Tile obigerTeil = new Tile(TileType.EMPTY, Orientation.UP);
+        if ((board.getTiles().indexOf(tile) / board.getWidth()) != 0) { //if its not in the first row
+            obigerTeil = board.getTiles().get(board.getTiles().indexOf(tile) - board.getWidth());
+        }
+        return obigerTeil;
+    }
+
+    private Tile getLinkerTeil(Tile tile) {
+        Tile linkerTeil = new Tile(TileType.EMPTY, Orientation.UP);
+        if ((board.getTiles().indexOf(tile) % board.getWidth()) != 0) {  //if its not in the first column
+            linkerTeil = board.getTiles().get(board.getTiles().indexOf(tile) - 1);
+        }
+        return linkerTeil;
+    }
+}

@@ -1,0 +1,153 @@
+package jpp.infinityloop;
+
+import jpp.infinityloop.adapter.BlobCoder;
+import jpp.infinityloop.generatoren.BoardGenerator;
+import jpp.infinityloop.generatoren.FilesGenerator;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+
+
+/*1-was sind thresholds?
+        */
+
+public class MainTest {
+
+    public static void main(String[] args){
+//        OutputStream out = System.out;
+//        PrintStream print = new PrintStream(out);
+//        print.write(10);
+//        print.println("\u221E");
+//        ByteArrayOutputStream array = new ByteArrayOutputStream();
+//        array.writeTo(out);
+//        System.out.println(array);
+//        System.out.println( "\\u" + Integer.toHexString('|' | 0x10000).substring(1) );
+//        byte b = 0x0c;
+//        byte d = (byte) 0xDF;
+//        byte b2 = 0x0A;
+//        byte mix = (byte) ((b << 4) | (b2 & 0x0F));
+//        byte tile1 = (byte) ((d >> 4) & 0x0F);
+//        byte tile2 = (byte) ((d) & 0x0f);
+//        System.out.println(Integer.toHexString(tile1).equals("d"));
+//        MainTest mainTest = new MainTest();
+//        byte[] width = {0x02,0x00,0x00};
+//        byte[] blabla = {(byte)0xe2,(byte) 0x88,(byte) 0x9e};
+//        byte khara = mainTest.mix(mainTest.mix(blabla[0], blabla[1]), blabla[2]);
+//        System.out.println("Khara ist: " + Integer.toHexString(khara));
+//         int blablaInt = mainTest.byteToInt(blabla);
+//         char c = (char) blablaInt;
+//        System.out.println("C: " + c);
+//        System.out.println(Character.toString(c) == "0x221E");
+//        System.out.println(mainTest.byteToInt(width));
+//        String[] res = mainTest.hexarray(blabla);
+//        for (String s : res){
+//            System.out.println(s);
+//        }
+//        String s = String.format("%8s", Integer.toBinaryString(b2 & 0xFF)).replace(' ', '0');
+//        System.out.println(s);
+//        System.out.println(mainTest.byteToInt(width));
+        MainTest mainTest = new MainTest();
+        byte[] decodedBoard = {(byte)0xe2, (byte) 0x88, (byte)0x9e,3,0,0,0,2,0,0,0,(byte)0x11, (byte)0x11, (byte) 0x11};
+        BlobCoder blobCoder = new BlobCoder();
+        BoardGenerator boardGenerator = new FilesGenerator();
+        Board board = blobCoder.decode(decodedBoard);
+        Board board2 = boardGenerator.next();
+        Board board3 = boardGenerator.next();
+        boardGenerator.next();
+        boardGenerator.next();
+        boardGenerator.next();
+        boardGenerator.next();
+        boardGenerator.next();
+        Board board4 = boardGenerator.next();
+        List<Tile> tiles = board.getTiles();
+//        board.shuffle();
+//        mainTest.printGame(board2);
+//        System.out.println("-------------------");
+//        mainTest.printGame(board3);
+//        System.out.println("-------------------");
+//        mainTest.printGame(board4);
+//        System.out.println("-------------------");
+//        board.shuffle();
+//        mainTest.printGame(board);
+//        board.shuffle();
+//        System.out.println("Board after being shuffled: ");
+//        mainTest.printGame(board);
+//        Tile linkerTeil = tiles.get(tiles.indexOf(tiles.get(3)) - 1);
+//        Tile obigerTeil = tiles.get(tiles.indexOf(tiles.get(3)) - board.getWidth());
+//        board.rotate(tiles.indexOf(linkerTeil) % board.getWidth(), tiles.indexOf(linkerTeil) / board.getWidth());
+//        System.out.println(board.checkSolved());
+//        board.rotate(tiles.indexOf    (obigerTeil) % board.getWidth(), tiles.indexOf(obigerTeil) / board.getWidth());
+//        mainTest.printGame(board);
+        System.out.println("Here starts the Algo!");
+        BacktrackingSolver backtrackingSolver = new BacktrackingSolver();
+        System.out.println(backtrackingSolver.solve(board4));
+        System.out.println(board4.checkSolved());
+
+
+//        System.out.println(board.getTiles().get(7));
+//        board.rotate(3, 1);
+//        System.out.println(board.getTiles().get(7));
+//        board.rotate(3, 1);
+//        System.out.println(board.getTiles().get(7));
+//        board.rotate(3, 1);
+//        System.out.println(board.getTiles().get(7));
+//        board.rotate(3, 1);
+//        System.out.println(board.getTiles().get(7));
+//        board.rotate(3, 1);
+//        System.out.println(board.getTiles().get(7));
+//        board.rotate(3, 1);
+
+    }
+
+
+    public void printGame(Board board){
+        int height = board.getHeight();
+        int width = board.getWidth();
+        for (int h = 0 ; h < height ; h++){
+            for (int w = 0; w < width ; w++){
+                System.out.print(board.getTiles().get(( (h * 2) + w )));
+
+            }
+            System.out.println();
+        }
+    }
+    public byte[] separate(byte mixed){
+        byte[] result = new byte[2];
+        result[0] = (byte)((mixed >> 4) & 0x0F);
+        result[1] = (byte)((mixed) & 0x0f);
+        return result;
+    }
+    public byte mix(byte b1,byte b2){
+        byte mixed =(byte) ((b1 << 4) | (b2 & 0x0F));
+        return mixed;
+    }
+    public String[] hexarray(byte[] byteArray){
+        String[] result = new String[2];
+        result[0] = Integer.toHexString(byteArray[0]);
+        result[1] = Integer.toHexString(byteArray[1]);
+        return result;
+    }
+    public int byteToInt(byte[] bytes) {
+        int val = 0;
+//        for (int i = 0; i < bytes.length; i++) {
+        for (int i = bytes.length-1; i >= 0; i--) {
+            val=val<<8;
+            val=val|(bytes[i] & 0xFF);
+        }
+        return val;
+    }
+    public String toHex(String arg) {
+        return String.format("%040x", new BigInteger(1, arg.getBytes(/*YOUR_CHARSET?*/)));
+    }
+
+}
